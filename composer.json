@@ -1,0 +1,35 @@
+{
+    "name": "jeroendesloovere/xmp-data-extractor",
+    "description": "Extracting XMP data from images using PHP.",
+    "type": "library",
+    "keywords": ["xmp", "data", "extractor", "php"],
+    "homepage": "https://github.com/jeroendesloovere/xmp-data-extractor",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeroen Desloovere",
+            "email": "info@jeroendesloovere.be"
+        }
+    ],
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5",
+        "symfony/phpunit-bridge": "^3.2"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "scripts": {
+        "test": "./bin/simple-phpunit"
+    },
+    "autoload": {
+        "psr-4": {
+            "JeroenDesloovere\\XmpDataExtractor\\": "src/XmpDataExtractor/"
+        },
+        "exclude-from-classmap": [
+            "**/tests/"
+        ]
+    }
+}
