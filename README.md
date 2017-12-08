@@ -1,6 +1,6 @@
-# XMP Data extractor
+# XMP Metadata extractor
 
-> Extracting XMP data from images/files using PHP.
+> Extracting XMP metadata from images/files using PHP.
 
 ## Usage
 
