@@ -9,14 +9,14 @@
 When using [composer](https://getcomposer.org), you can execute in your terminal:
 
 ```
-composer require jeroendesloovere/xmp-data-extractor
+composer require jeroendesloovere/xmp-metadata-extractor
 ```
 
 ### Example
 
 ```php
-use JeroenDesloovere\XmpDataExtractor;
-$xmpDataExtractor = new XmpDataExtractor();
+use JeroenDesloovere\XmpMetadataExtractor;
+$xmpDataExtractor = new XmpMetadataExtractor();
 
 # Get XmpData from file
 $xmpData = $xmpDataExtractor->extract('path/to/filename.jpg'):
@@ -27,6 +27,6 @@ $xmpData = $xmpDataExtractor->convertToArray('... file content ...'):
 
 ## Tests
 
-> The XmpDataExtractor class has test cases. [View all test cases](tests/XmpDataExtractor/XmpDataExtractorTest.php).
+> The XmpMetadataExtractor class has test cases. [View all test cases](tests/XmpMetadataExtractor/XmpMetadataExtractorTest.php).
 
 Use `composer test tests` to execute the tests.

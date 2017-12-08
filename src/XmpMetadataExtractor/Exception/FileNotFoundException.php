@@ -1,6 +1,6 @@
 <?php
 
-namespace JeroenDesloovere\XmpDataExtractor\Exception;
+namespace JeroenDesloovere\XmpMetadataExtractor\Exception;
 
 class FileNotFoundException extends \Exception
 {

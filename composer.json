@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "JeroenDesloovere\\XmpDataExtractor\\": "src/XmpDataExtractor/"
+            "JeroenDesloovere\\XmpMetadataExtractor\\": "src/XmpMetadataExtractor/"
         },
         "exclude-from-classmap": [
             "**/tests/"

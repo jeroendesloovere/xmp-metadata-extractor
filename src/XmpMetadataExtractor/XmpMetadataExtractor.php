@@ -1,12 +1,12 @@
 <?php
 
-namespace JeroenDesloovere\XmpDataExtractor;
+namespace JeroenDesloovere\XmpMetadataExtractor;
 
 use DOMDocument;
-use JeroenDesloovere\XmpDataExtractor\Exception\FileNotFoundException;
+use JeroenDesloovere\XmpMetadataExtractor\Exception\FileNotFoundException;
 use SplFileInfo;
 
-class XmpDataExtractor
+class XmpMetadataExtractor
 {
     protected const RDF_ALT = 'rdf:Alt';
     protected const RDF_BAG = 'rdf:Bag';
