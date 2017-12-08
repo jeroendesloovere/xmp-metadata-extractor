@@ -1,6 +1,6 @@
 {
-    "name": "jeroendesloovere/xmp-data-extractor",
-    "description": "Extracting XMP data from images using PHP.",
+    "name": "jeroendesloovere/xmp-metadata-extractor",
+    "description": "Extracting XMP metadata from images using PHP.",
     "type": "library",
     "keywords": ["php", "xmp", "metadata", "extractor", "image"],
     "homepage": "https://github.com/jeroendesloovere/xmp-data-extractor",
