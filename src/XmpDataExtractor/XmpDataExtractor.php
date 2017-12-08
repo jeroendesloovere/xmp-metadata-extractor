@@ -107,10 +107,10 @@ class XmpDataExtractor
 
     protected function getXmpXmlString(string $content): string
     {
-        $xmp_data_start = strpos($content, '<x:xmpmeta');
-        $xmp_data_end = strpos($content, '</x:xmpmeta>');
-        $xmp_length = $xmp_data_end - $xmp_data_start;
+        $xmpDataStart = strpos($content, '<x:xmpmeta');
+        $xmpDataEnd = strpos($content, '</x:xmpmeta>');
+        $xmpLength = $xmpDataEnd - $xmpDataStart;
 
-        return substr($content, $xmp_data_start, $xmp_length + 12);
+        return substr($content, $xmpDataStart, $xmpLength + 12);
     }
 }
