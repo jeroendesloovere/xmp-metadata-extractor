@@ -77,7 +77,7 @@ class XmpMetadataExtractor
         return $output;
     }
 
-    public function convertToArray(string $content): array
+    public function extractFromContent(string $content): array
     {
         try {
             $doc = new DOMDocument();
@@ -93,16 +93,16 @@ class XmpMetadataExtractor
         }
     }
 
-    public function extract(string $filePath): array
+    public function extractFromFile(string $file): array
     {
         try {
-            $file = new SplFileInfo($filePath);
+            $file = new SplFileInfo($file);
             $contents = file_get_contents($file->getPathname());
         } catch (\Exception $e) {
             throw new FileNotFoundException('The given File could not be found.');
         }
 
-        return $this->convertToArray($contents);
+        return $this->extractFromContent($contents);
     }
 
     protected function getXmpXmlString(string $content): string

@@ -16,7 +16,7 @@ class XmpMetadataExtractorTest extends TestCase
     public function testXmpString(): void
     {
         $extractor = new XmpMetadataExtractor();
-        $array = $extractor->convertToArray($this->xmpString);
+        $array = $extractor->extractFromContent($this->xmpString);
         $this->assertEquals(true, array_key_exists('rdf:RDF', $array));
         $this->assertEquals(true, array_key_exists('rdf:Description', $array['rdf:RDF']));
         $this->assertEquals(true, array_key_exists('@attributes', $array));
@@ -27,7 +27,7 @@ class XmpMetadataExtractorTest extends TestCase
     public function testXmpString2(): void
     {
         $extractor = new XmpMetadataExtractor();
-        $array = $extractor->convertToArray($this->xmpString2);
+        $array = $extractor->extractFromContent($this->xmpString2);
         $this->assertEquals(true, is_array($array));
     }
 
@@ -35,6 +35,6 @@ class XmpMetadataExtractorTest extends TestCase
     {
         $extractor = new XmpMetadataExtractor();
 
-        $this->assertEquals([], $extractor->convertToArray(''));
+        $this->assertEquals([], $extractor->extractFromContent(''));
     }
 }
