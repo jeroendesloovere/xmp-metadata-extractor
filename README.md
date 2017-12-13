@@ -29,6 +29,7 @@ $xmpData = $xmpDataExtractor->extract('path/to/filename.jpg'):
 # OR get XmpData by given the file content - file_get_contents(...);
 $xmpData = $xmpDataExtractor->convertToArray('... file content ...'):
 ```
+> `$xmpData` will be an `array` with all XMP Metadata.
 
 ## Tests
 
