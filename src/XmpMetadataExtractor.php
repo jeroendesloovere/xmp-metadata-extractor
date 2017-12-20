@@ -52,8 +52,10 @@ final class XmpMetadataExtractor
             }
         }
 
-        if ($node->attributes->length && !is_array($output)) { //Has attributes but isn't an array
-            $output = array('@content' => $output); //Change output into an array.
+        // Has attributes but isn't an array
+        if ($node->attributes->length && !is_array($output)) {
+            // Change output into an array.
+            $output = array('@content' => $output);
         }
 
         if (is_array($output)) {
