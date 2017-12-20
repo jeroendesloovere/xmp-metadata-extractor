@@ -18,7 +18,7 @@ final class XmpMetadataExtractor
         self::RDF_SEQ,
     ];
 
-    protected function convertDomNodeToArray($node)
+    private function convertDomNode($node)
     {
         $output = [];
 
@@ -105,7 +105,7 @@ final class XmpMetadataExtractor
         return $this->extractFromContent($contents);
     }
 
-    protected function getXmpXmlString(string $content): string
+    private function getXmpXmlString(string $content): string
     {
         $xmpDataStart = strpos($content, '<x:xmpmeta');
         $xmpDataEnd = strpos($content, '</x:xmpmeta>');
