@@ -20,58 +20,63 @@ final class XmpMetadataExtractor
 
     private function convertDomNode($node)
     {
-        $output = [];
-
         switch ($node->nodeType) {
             case XML_CDATA_SECTION_NODE:
             case XML_TEXT_NODE:
-                $output = trim($node->textContent);
+                return trim($node->textContent);
 
                 break;
             case XML_ELEMENT_NODE:
-                for ($i = 0, $m = $node->childNodes->length; $i < $m; $i++) {
-                    $child = $node->childNodes->item($i);
-                    $v = $this->convertDomNodeToArray($child);
-
-                    if (isset($child->tagName)) {
-                        $t = $child->tagName;
-                        if (!isset($output[$t])) {
-                            $output[$t] = array();
-                        }
-                        $output[$t][] = $v;
-                    } elseif ($v || $v === '0') {
-                        $output = (string)$v;
-                    }
-                }
-
-                if ($node->attributes->length && !is_array($output)) { //Has attributes but isn't an array
-                    $output = array('@content' => $output); //Change output into an array.
-                }
-
-                if (is_array($output)) {
-                    if ($node->attributes->length) {
-                        $a = array();
-                        foreach ($node->attributes as $attrName => $attrNode) {
-                            $a[$attrName] = (string)$attrNode->value;
-                        }
-                        $output['@attributes'] = $a;
-                    }
-
-                    foreach ($output as $t => $v) {
-                        // We are combining arrays for rdf:Bag, rdf:Alt, rdf:Seq
-                        if (in_array($t, self::POSSIBLE_CONTAINERS)) {
-                            if (!array_key_exists(self::RDF_LI, $v[0])) {
-                                break;
-                            }
-
-                            $output = $v[0][self::RDF_LI];
-                        } elseif (is_array($v) && count($v) == 1 && $t != '@attributes') {
-                            $output[$t] = $v[0];
-                        }
-                    }
-                }
+                return $this->convertXmlNode($node);
 
                 break;
+        }
+    }
+
+    private function convertXmlNode(\DOMElement $node)
+    {
+        $output = [];
+
+        for ($i = 0, $m = $node->childNodes->length; $i < $m; $i++) {
+            $child = $node->childNodes->item($i);
+            $v = $this->convertDomNode($child);
+
+            if (isset($child->tagName)) {
+                $t = $child->tagName;
+                if (!isset($output[$t])) {
+                    $output[$t] = array();
+                }
+                $output[$t][] = $v;
+            } elseif ($v || $v === '0') {
+                $output = (string)$v;
+            }
+        }
+
+        if ($node->attributes->length && !is_array($output)) { //Has attributes but isn't an array
+            $output = array('@content' => $output); //Change output into an array.
+        }
+
+        if (is_array($output)) {
+            if ($node->attributes->length) {
+                $a = array();
+                foreach ($node->attributes as $attrName => $attrNode) {
+                    $a[$attrName] = (string)$attrNode->value;
+                }
+                $output['@attributes'] = $a;
+            }
+
+            foreach ($output as $t => $v) {
+                // We are combining arrays for rdf:Bag, rdf:Alt, rdf:Seq
+                if (in_array($t, self::POSSIBLE_CONTAINERS)) {
+                    if (!array_key_exists(self::RDF_LI, $v[0])) {
+                        break;
+                    }
+
+                    $output = $v[0][self::RDF_LI];
+                } elseif (is_array($v) && count($v) == 1 && $t != '@attributes') {
+                    $output[$t] = $v[0];
+                }
+            }
         }
 
         return $output;
@@ -84,7 +89,7 @@ final class XmpMetadataExtractor
             $doc->loadXML($this->getXmpXmlString($content));
 
             $root = $doc->documentElement;
-            $output = $this->convertDomNodeToArray($root);
+            $output = $this->convertDomNode($root);
             $output['@root'] = $root->tagName;
 
             return $output;
