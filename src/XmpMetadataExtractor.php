@@ -6,7 +6,7 @@ use DOMDocument;
 use JeroenDesloovere\XmpMetadataExtractor\Exception\FileNotFoundException;
 use SplFileInfo;
 
-class XmpMetadataExtractor
+final class XmpMetadataExtractor
 {
     protected const RDF_ALT = 'rdf:Alt';
     protected const RDF_BAG = 'rdf:Bag';
