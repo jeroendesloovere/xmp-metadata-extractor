@@ -33,7 +33,7 @@ final class XmpMetadataExtractor
         }
     }
 
-    private function convertXmlNode(\DOMElement $node)
+    private function convertXmlNode($node)
     {
         $output = [];
 
