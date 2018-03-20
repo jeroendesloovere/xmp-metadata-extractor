@@ -1,6 +1,6 @@
 # XMP Metadata extractor
 
-[![Latest Stable Version](http://img.shields.io/packagist/v/jeroendesloovere/xmp-metadata-extractor.svg)](https://packagist.org/packages/jeroendesloovere/xmp-metadata-extractor)
+[![Packagist](https://img.shields.io/packagist/v/jeroendesloovere/xmp-metadata-extractor.svg)](jeroendesloovere/xmp-metadata-extractor)
 [![License](http://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/jeroendesloovere/xmp-metadata-extractor/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/jeroendesloovere/xmp-metadata-extractor.svg?branch=master)](https://travis-ci.org/jeroendesloovere/xmp-metadata-extractor)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jeroendesloovere/xmp-metadata-extractor/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jeroendesloovere/xmp-metadata-extractor/?branch=master)
