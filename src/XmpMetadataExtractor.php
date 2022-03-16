@@ -8,6 +8,7 @@ use SplFileInfo;
 
 final class XmpMetadataExtractor
 {
+    private const DEFAULT_NAMESPACE = 'x';
     protected const RDF_ALT = 'rdf:Alt';
     protected const RDF_BAG = 'rdf:Bag';
     protected const RDF_LI = 'rdf:li';
@@ -17,6 +18,16 @@ final class XmpMetadataExtractor
         self::RDF_BAG,
         self::RDF_SEQ,
     ];
+
+    /**
+     * @var string
+     */
+    private $namespace;
+
+    public function __construct(string $namespace = self::DEFAULT_NAMESPACE)
+    {
+        $this->namespace = $namespace;
+    }
 
     private function convertDomNode($node)
     {
@@ -114,10 +125,10 @@ final class XmpMetadataExtractor
 
     private function getXmpXmlString(string $content): string
     {
-        $xmpDataStart = strpos($content, '<x:xmpmeta');
-        $xmpDataEnd = strpos($content, '</x:xmpmeta>');
+        $xmpDataStart = strpos($content, '<' . $this->namespace . ':xmpmeta');
+        $xmpDataEnd = strpos($content, '</' . $this->namespace . ':xmpmeta>');
         $xmpLength = $xmpDataEnd - $xmpDataStart;
 
-        return substr($content, $xmpDataStart, $xmpLength + 12);
+        return substr($content, $xmpDataStart, $xmpLength + strlen($this->namespace) + 11);
     }
 }

@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * How to execute all tests: `vendor/bin/phpunit`
+ * @coversDefaultClass XmpMetadataExtractor
  */
 class XmpMetadataExtractorTest extends TestCase
 {
@@ -13,6 +14,9 @@ class XmpMetadataExtractorTest extends TestCase
 
     private $xmpString2 = '<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="XMP Core 5.6.0"> <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description rdf:about="" xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/" xmlns:Xservice="http://ns.Xservice.net/1.0/" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:lr="http://ns.adobe.com/lightroom/1.0/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:MicrosoftPhoto="http://ns.microsoft.com/photo/1.0" photoshop:DateCreated="2017-02-10T10:49:14+01:00" photoshop:ICCProfile="sRGB IEC61966-2.1" Xservice:architect="Bureau D\'Hondt bvba" Xservice:surface__area="50000" Xservice:geo__longitude="3.41205930000001" Xservice:geo__latitude="50.8574846" xmp:CreatorTool="Daminion - http://Xservice.net" xmp:MetadataDate="2017-11-22T17:06:24+01:00" xmp:ModifyDate="2017-11-22T17:06:24+01:00"> <Xservice:sector> <rdf:Bag> <rdf:li>Retail</rdf:li> </rdf:Bag> </Xservice:sector> <Xservice:construction__type> <rdf:Bag> <rdf:li>Logistiek</rdf:li> </rdf:Bag> </Xservice:construction__type> <Xservice:materials__used> <rdf:Bag> <rdf:li>Glad Grijs</rdf:li> </rdf:Bag> </Xservice:materials__used> <Xservice:customer> <rdf:Bag> <rdf:li>TVH Rental Equipment Division nv</rdf:li> </rdf:Bag> </Xservice:customer> <Xservice:specials> <rdf:Bag> <rdf:li>Breeam</rdf:li> <rdf:li>Benor</rdf:li> </rdf:Bag> </Xservice:specials> <lr:hierarchicalSubject> <rdf:Bag> <rdf:li>Werfnummer|SF16-0213-PR TVH Waregem</rdf:li> </rdf:Bag> </lr:hierarchicalSubject> <dc:subject> <rdf:Bag> <rdf:li>Werfnummer|SF16-0213-PR TVH Waregem</rdf:li> </rdf:Bag> </dc:subject> <dc:creator> <rdf:Seq/> </dc:creator> <MicrosoftPhoto:LastKeywordIPTC> <rdf:Bag> <rdf:li>Werfnummer|SF16-0213-PR TVH Waregem</rdf:li> </rdf:Bag> </MicrosoftPhoto:LastKeywordIPTC> <MicrosoftPhoto:LastKeywordXMP> <rdf:Bag> <rdf:li>Werfnummer|SF16-0213-PR TVH Waregem</rdf:li> </rdf:Bag> </MicrosoftPhoto:LastKeywordXMP> </rdf:Description> </rdf:RDF> </x:xmpmeta>';
 
+    /**
+     * @covers XmpMetadataExtractor::extractFromContent
+     */
     public function testXmpString(): void
     {
         $extractor = new XmpMetadataExtractor();
@@ -24,6 +28,19 @@ class XmpMetadataExtractorTest extends TestCase
         $this->assertEquals('Glad wit', $array['rdf:RDF']['rdf:Description']['Xservice:materials__used']);
     }
 
+    /**
+     * @covers XmpMetadataExtractor::__construct(
+     */
+    public function testOtherNamespace(): void
+    {
+        $extractor = new XmpMetadataExtractor('xmp');
+        $array = $extractor->extractFromContent($this->xmpString);
+        $this->assertEquals(true, array_key_exists('rdf:RDF', $array));
+    }
+
+    /**
+     * @covers XmpMetadataExtractor::extractFromContent(
+     */
     public function testXmpString2(): void
     {
         $extractor = new XmpMetadataExtractor();
@@ -31,6 +48,9 @@ class XmpMetadataExtractorTest extends TestCase
         $this->assertEquals(true, is_array($array));
     }
 
+    /**
+     * @covers XmpMetadataExtractor::extractFromContent(
+     */
     public function testNoXmpData(): void
     {
         $extractor = new XmpMetadataExtractor();
